@@ -46,7 +46,7 @@ public class Field : MonoBehaviour
         if (anyCellMoved)
         {
             GenerateRandomCell();
-            //CheckGameResult();
+            CheckGameResult();
         }
     }
 
@@ -158,6 +158,11 @@ public class Field : MonoBehaviour
             instance = this;
     }
 
+    private void Start()
+    {
+        SwipeController.SwipeEvent += OnInput;
+    }
+
     private void CreateField()
     {
         field = new Cell[fieldSize, fieldSize];
@@ -212,7 +217,9 @@ public class Field : MonoBehaviour
         int value = Random.Range(0, 10) == 0 ? 2 : 1;
 
         var cell = emptyCells[Random.Range(0, emptyCells.Count)];
-        cell.SetValue(cell.X, cell.Y, value);
+        cell.SetValue(cell.X, cell.Y, value, false);
+
+        CellAnimationController.Instance.SmoothAppear(cell);
     }
 
     private void ResetCellFlags()

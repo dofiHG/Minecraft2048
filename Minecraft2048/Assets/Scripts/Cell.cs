@@ -17,12 +17,15 @@ public class Cell : MonoBehaviour
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text points;
 
-    public void SetValue(int x, int y, int value)
+    private CellAnimation currentAnimation;
+    public void SetValue(int x, int y, int value, bool updateUI = true)
     {
         X = x;
         Y = y;
         Value = value;
-        UpdateCell();
+
+        if (updateUI)
+            UpdateCell();
     }
 
     public void IncreaseValue()
@@ -31,8 +34,6 @@ public class Cell : MonoBehaviour
         HasMerged = true;
 
         GameController.instance.AddPoints(Points);
-
-        UpdateCell();
     }
 
     public void ResetFlags()
@@ -42,22 +43,36 @@ public class Cell : MonoBehaviour
 
     public void MergeWithCell(Cell otherCell)
     {
+        CellAnimationController.Instance.SmoothTrasition(this, otherCell, true);
+
         otherCell.IncreaseValue();
         SetValue(X, Y, 0);
-
-        UpdateCell();
     }
 
     public void MoveToCell(Cell target)
     {
-        target.SetValue(target.X, target.Y, Value);
-        SetValue(X, Y, 0);
+        CellAnimationController.Instance.SmoothTrasition(this, target, false);
 
-        UpdateCell();
+        target.SetValue(target.X, target.Y, Value, false);
+        SetValue(X, Y, 0);
     }
 
     public void UpdateCell()
     {
         points.text = IsEmpty ? string.Empty: Points.ToString();
+
+        image.color = Value > 0 ? new Color32(255, 255, 255, 255) : new Color32(255, 153, 153, 255);
+        image.sprite = SpritesManager.Instance.cellSprites[Value];
+    }
+
+    public void SetAnimation(CellAnimation animation)
+    {
+        currentAnimation = animation;
+    }
+
+    public void CancelAnimation()
+    {
+        if (currentAnimation != null)
+            currentAnimation.Destroy();
     }
 }

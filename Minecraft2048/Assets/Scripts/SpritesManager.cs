@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SpritesManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static SpritesManager Instance;
 
-    // Update is called once per frame
-    void Update()
+    public Sprite[] cellSprites;
+
+    public Color pointsDarkColor;
+    public Color pointsLightColor;
+
+    private void Awake()
     {
-        
+        if (Instance == null)
+            Instance = this;
     }
 }
