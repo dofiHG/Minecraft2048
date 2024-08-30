@@ -1,9 +1,14 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using YG;
 
 public class Field : MonoBehaviour
 {
     public static Field instance;
+    public Transform mainField;
+    public TMP_FontAsset fontAsset;
+    public AudioSource swipe;
 
     public float cellSize;
     public float spacing;
@@ -52,6 +57,14 @@ public class Field : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
+        try 
+        {
+            if (GameController.GameStarted && GameObject.Find("StartEndPanel").activeInHierarchy)
+                PanelManager.instance.OkButton(GameObject.Find("StartEndPanel").GetComponent<Transform>());
+        }
+
+        catch {  }
+
         int startXY = direction.x > 0 || direction.y < 0 ? fieldSize - 1 : 0;
         int dir = direction.x !=0 ? (int)direction.x : -(int)direction.y;
 
@@ -84,6 +97,9 @@ public class Field : MonoBehaviour
 
     private Cell FindCellToMerge(Cell cell, Vector2 direction)
     {
+
+            swipe.Play();
+
         int startX = cell.X + (int)direction.x;
         int startY = cell.Y - (int)direction.y;
 
@@ -103,6 +119,9 @@ public class Field : MonoBehaviour
     }
     private Cell FindEmptyCell(Cell cell, Vector2 direction)
     {
+
+            swipe.Play();
+
         Cell emptyCell = null;
 
         int startX = cell.X + (int)direction.x;
@@ -160,6 +179,9 @@ public class Field : MonoBehaviour
 
     private void Start()
     {
+        cellSize = YandexGame.savesData.cellSize;
+        fieldSize = YandexGame.savesData.fieldSize;
+        spacing = YandexGame.savesData.spacing;
         SwipeController.SwipeEvent += OnInput;
     }
 
@@ -180,6 +202,8 @@ public class Field : MonoBehaviour
                 var cell = Instantiate(cellPrefab, transform, false);
                 var position = new Vector2(startX + (x * (cellSize + spacing)), startY - (y * (cellSize + spacing)));
                 cell.transform.localPosition = position;
+                cell.GetComponent<RectTransform>().sizeDelta = new Vector2(cellSize, cellSize);
+                cell.GetComponentInChildren<TMP_Text>().GetComponent<RectTransform>().sizeDelta = new Vector2(cellSize - 15, cellSize - 15);
 
                 field[x, y] = cell;
 
@@ -190,8 +214,10 @@ public class Field : MonoBehaviour
 
     public void GenerateField()
     {
-        if (field == null)
-            CreateField();
+        foreach (Transform child in mainField)
+            Destroy(child.gameObject);
+         
+        CreateField();
 
         for (int x = 0; x < fieldSize; x++)
             for (int y = 0; y < fieldSize; y++)

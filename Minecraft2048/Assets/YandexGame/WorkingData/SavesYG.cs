@@ -16,11 +16,11 @@ namespace YG
         public string newPlayerName = "Hello!";
         public bool[] openLevels = new bool[3];
 
-        // Ваши сохранения
-
-        // ...
-
-        // Поля (сохранения) можно удалять и создавать новые. При обновлении игры сохранения ломаться не должны
+        public bool isFirstPlay = true;
+        public int best;
+        public int cellSize;
+        public int spacing;
+        public int fieldSize;
 
 
         // Вы можете выполнить какие то действия при загрузке сохранений

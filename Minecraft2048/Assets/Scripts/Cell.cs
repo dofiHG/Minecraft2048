@@ -61,7 +61,7 @@ public class Cell : MonoBehaviour
     {
         points.text = IsEmpty ? string.Empty: Points.ToString();
 
-        image.color = Value > 0 ? new Color32(255, 255, 255, 255) : new Color32(255, 153, 153, 255);
+        image.color = Value > 0 ? new Color32(255, 255, 255, 255) : new Color32(170, 170, 170, 255);
         image.sprite = SpritesManager.Instance.cellSprites[Value];
     }
 

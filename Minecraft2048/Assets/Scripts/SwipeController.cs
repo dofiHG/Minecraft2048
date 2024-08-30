@@ -6,8 +6,6 @@ public class SwipeController : MonoBehaviour
     public static event OnSwipeInput SwipeEvent;
     public delegate void OnSwipeInput(Vector2 direction);
 
-    public TMP_Text t;
-
     private Vector2 tapPosition;
     private Vector2 swipeDelta;
 
@@ -20,10 +18,6 @@ public class SwipeController : MonoBehaviour
     {
         isMobile = false;
         isMobile = Application.isMobilePlatform;
-        if (isMobile)
-            t.text = "Mobile";
-        else t.text = "PC";
-        Debug.Log(isMobile);
     }
 
     private void Update()
