@@ -10,6 +10,7 @@ public class PanelManager : MonoBehaviour
 
     public GameObject mainPanel;
     public GameObject modesPanel;
+    public GameObject settingsPanel;
     public TMP_Text adviceText;
     public TMP_Text loseText;
     public TMP_Text winText;
@@ -59,7 +60,7 @@ public class PanelManager : MonoBehaviour
         retryButton.gameObject.SetActive(true);
         retryImage.gameObject.SetActive(true);
         retryText.gameObject.SetActive(true);
-        GameObject.Find("Settings").gameObject.SetActive(true);
+        settingsPanel.SetActive(true);
     }
 
     public void LoseEvent()
@@ -76,7 +77,7 @@ public class PanelManager : MonoBehaviour
         retryButton.gameObject.SetActive(true);
         retryImage.gameObject.SetActive(true);
         retryText.gameObject.SetActive(true);
-        GameObject.Find("Settings").gameObject.SetActive(true);
+        settingsPanel.SetActive(true);
     }
 
     public void OkButton(Transform parent)

@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class CellAnimation : MonoBehaviour
 {
+    public static bool isAnimation;
+
     [SerializeField] private Image image;
     [SerializeField] private TMP_Text points;
 
@@ -16,6 +18,7 @@ public class CellAnimation : MonoBehaviour
 
     public void Move(Cell from, Cell to, bool isMerging)
     {
+        isAnimation = true;
         from.CancelAnimation();
         to.SetAnimation(this);
 
@@ -76,6 +79,7 @@ public class CellAnimation : MonoBehaviour
             cell.UpdateCell();
             Destroy();
         });
+        isAnimation = false;
     }
 
     public void Destroy()

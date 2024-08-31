@@ -22,20 +22,14 @@ public class Field : MonoBehaviour
 
     private void Update()
     {
-        /*float horizontalDirection = Input.GetAxis("Horizontal");
-        float verticalDirection = Input.GetAxis("Vertical");
-
-        OnInput(new Vector2(horizontalDirection, verticalDirection));*/
-#if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.A)) 
+        if (Input.GetKeyDown(KeyCode.A))
             OnInput(Vector2.left);
-        if (Input.GetKeyDown(KeyCode.D)) 
+        if (Input.GetKeyDown(KeyCode.D))
             OnInput(Vector2.right);
-        if (Input.GetKeyDown(KeyCode.W)) 
+        if (Input.GetKeyDown(KeyCode.W))
             OnInput(Vector2.up);
-        if (Input.GetKeyDown(KeyCode.S)) 
+        if (Input.GetKeyDown(KeyCode.S))
             OnInput(Vector2.down);
-#endif
     }
 
     private void OnInput(Vector2 direction)

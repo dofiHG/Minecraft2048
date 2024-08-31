@@ -17,10 +17,14 @@ namespace YG
         public bool[] openLevels = new bool[3];
 
         public bool isFirstPlay = true;
-        public int best;
+        public int best3x3;
+        public int best4x4;
+        public int best5x5;
+        public int best7x7;
         public int cellSize;
         public int spacing;
         public int fieldSize;
+        
 
 
         // Вы можете выполнить какие то действия при загрузке сохранений

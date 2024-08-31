@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using YG;
@@ -16,7 +17,6 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        bestPointsText.text = YandexGame.savesData.best.ToString();
         StartGame();
     }
 
@@ -28,6 +28,24 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
+        switch (ChosoePlayMode.lvl)
+        {
+            case 0:
+                bestPointsText.text = YandexGame.savesData.best4x4.ToString();
+                break;
+            case 3:
+                bestPointsText.text = YandexGame.savesData.best3x3.ToString();
+                break;
+            case 4:
+                bestPointsText.text = YandexGame.savesData.best4x4.ToString();
+                break;
+            case 5:
+                bestPointsText.text = YandexGame.savesData.best5x5.ToString();
+                break;
+            case 7:
+                bestPointsText.text = YandexGame.savesData.best7x7.ToString();
+                break;
+        }
         if (PanelManager.isRetry)
             PanelManager.instance.OkButton(GameObject.Find("StartEndPanel").GetComponent<Transform>());
         GameStarted = true;
@@ -61,6 +79,25 @@ public class GameController : MonoBehaviour
     {
         Points = points;
         pointsText.text = Points.ToString();
-        if (points > YandexGame.savesData.best) { YandexGame.savesData.best = points; bestPointsText.text = points.ToString(); }
+        if (points > Convert.ToInt32(bestPointsText.text)) 
+        {
+            bestPointsText.text = points.ToString();
+            switch (ChosoePlayMode.lvl)
+            {
+                case 3:
+                    YandexGame.savesData.best3x3 = points;
+                    break;
+                case 4:
+                    YandexGame.savesData.best4x4 = points;
+                    break;
+                case 5:
+                    YandexGame.savesData.best5x5 = points;
+                    break;
+                case 7:
+                    YandexGame.savesData.best7x7 = points;
+                    break;
+            }
+            YandexGame.SaveProgress();
+        }
     }
 }
