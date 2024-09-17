@@ -30,20 +30,17 @@ public class PanelManager : MonoBehaviour
     {
         if (instance == null) { instance = this; }
 
-        if (YandexGame.savesData.isFirstPlay)
+        mainPanel.SetActive(true);
+        modesPanel.SetActive(true);
+        foreach (Transform child in modesPanel.transform)
         {
-            mainPanel.SetActive(true);
-            modesPanel.SetActive(true);
-            foreach (Transform child in modesPanel.transform)
-            {
-                child.gameObject.SetActive(true);
-                foreach (Transform child2 in child)
-                    child2.gameObject.SetActive(true);
-            }
-            adviceText.gameObject.SetActive(true);
-            YandexGame.savesData.isFirstSession = false;
-            YandexGame.SaveProgress();
+            child.gameObject.SetActive(true);
+            foreach (Transform child2 in child)
+                child2.gameObject.SetActive(true);
         }
+        adviceText.gameObject.SetActive(true);
+        YandexGame.savesData.isFirstSession = false;
+        YandexGame.SaveProgress();
     }
 
     public void WinEvent()

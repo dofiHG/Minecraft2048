@@ -1,5 +1,5 @@
 {
-    "idSave": 587,
+    "idSave": 2065,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -10,12 +10,12 @@
         true,
         false
     ],
-    "isFirstPlay": true,
+    "tempLvL": 4,
     "best3x3": 0,
     "best4x4": 0,
     "best5x5": 0,
     "best7x7": 0,
-    "cellSize": 200,
+    "cellSize": 180,
     "spacing": 20,
     "fieldSize": 4
 }

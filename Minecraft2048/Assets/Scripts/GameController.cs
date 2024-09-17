@@ -17,6 +17,12 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        if (ChosoePlayMode.lvl == 0)
+        {
+            pointsText.text = "0";
+            bestPointsText.text = "0";
+            ChosoePlayMode.lvl = 4;
+        }
         StartGame();
     }
 
@@ -28,7 +34,9 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        switch (ChosoePlayMode.lvl)
+        bestPointsText.text = "0";
+        SetPoints(0);
+        switch (YandexGame.savesData.tempLvL)
         {
             case 0:
                 bestPointsText.text = YandexGame.savesData.best4x4.ToString();
@@ -49,7 +57,6 @@ public class GameController : MonoBehaviour
         if (PanelManager.isRetry)
             PanelManager.instance.OkButton(GameObject.Find("StartEndPanel").GetComponent<Transform>());
         GameStarted = true;
-        SetPoints(0);
         Field.instance.GenerateField();
         PanelManager.isRetry = false;
     }

@@ -19,11 +19,11 @@ public class ChosoePlayMode : MonoBehaviour
 
     public void ChangeGameMode()
     {
-        lvl = Convert.ToInt32(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text.Substring(0, 1));
-
-        if (lvl == 3 || lvl == 4) {  YandexGame.savesData.cellSize = 200; YandexGame.savesData.spacing = 20; }
-        else if (lvl == 5) { YandexGame.savesData.cellSize = 120; YandexGame.savesData.spacing = 10; }
+        lvl = Convert.ToInt32(EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text.Substring(0, 1)); 
+        if (lvl == 3 || lvl == 4) { YandexGame.savesData.cellSize = 180; YandexGame.savesData.spacing = 20; }
+        else if (lvl == 5) { YandexGame.savesData.cellSize = 130; YandexGame.savesData.spacing = 20; }
         else { YandexGame.savesData.cellSize = 100; YandexGame.savesData.spacing = 7; }
+        YandexGame.savesData.tempLvL = lvl;
         YandexGame.savesData.fieldSize = lvl;
         YandexGame.SaveProgress();
 

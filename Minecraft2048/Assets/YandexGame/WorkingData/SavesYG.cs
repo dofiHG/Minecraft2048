@@ -16,7 +16,7 @@ namespace YG
         public string newPlayerName = "Hello!";
         public bool[] openLevels = new bool[3];
 
-        public bool isFirstPlay = true;
+        public int tempLvL;
         public int best3x3;
         public int best4x4;
         public int best5x5;
