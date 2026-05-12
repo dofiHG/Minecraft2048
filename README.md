@@ -1,2 +1,1 @@
-# ClickerTroll
- 
+# ы
